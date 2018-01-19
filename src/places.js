@@ -123,7 +123,13 @@ export default function places(options) {
   pin.innerHTML = pinIcon;
   autocompleteContainer.appendChild(pin);
 
-  pin.addEventListener('click', () => autocompleteInstance.focus());
+  pin.addEventListener('click', function () {
+    autocompleteInstance.autocomplete.setVal('My Location');
+    pin.style.display = 'none';
+    placesInstance.emit('pin_icon_clicked');
+    return autocompleteInstance.focus();
+  });
+  
   clear.addEventListener('click', () => {
     autocompleteInstance.autocomplete.setVal('');
     autocompleteInstance.focus();
